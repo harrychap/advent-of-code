@@ -4,7 +4,10 @@ import Task
 import readInput
 
 object Task05 : Task {
-    override fun partA(): Int = 0
+    override fun partA(): Int {
+        println(parseInput())
+        return 0
+    }
 
     override fun partB(): Int = 0
 
