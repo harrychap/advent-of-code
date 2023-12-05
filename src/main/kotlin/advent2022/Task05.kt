@@ -40,7 +40,6 @@ object Task05 : Task {
                 partBStack[from]?.removeLast()
             }
         }
-        println(partBStack)
         return partBStack.map { it.value.last() }
     }
 

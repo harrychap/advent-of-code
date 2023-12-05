@@ -12,7 +12,7 @@ object Task08 : Task {
             val upColumn = column.subList(0, rowIndex)
             val leftRow = row.subList(0, treeIndex)
             val rightRow = row.subList(treeIndex + 1, row.size)
-            
+
             if (!downColumn.any { it >= tree } || !upColumn.any { it >= tree } || !leftRow.any { it >= tree } || !rightRow.any { it >= tree }) {
                 tree
             } else null
@@ -35,7 +35,7 @@ object Task08 : Task {
 
     private fun parseInput() = readInput("2022-08.txt").split('\n').map { it.map { it.digitToInt() } }
 
-    private fun getColumn(matrix: List<List<Int>>, col: Int) = IntArray(matrix.size) { matrix[it][col] }.toList()
+    private fun getColumn(matrix: List<List<Int>>, col: Int): List<Int> = IntArray(matrix.size) { matrix[it][col] }.toList()
 
     private fun <T> Iterable<T>.takeUntil(predicate: (T) -> Boolean): List<T> {
         val list = ArrayList<T>()
