@@ -5,26 +5,45 @@ import readInput
 
 object Task08 : Task {
     override fun partA(): Int {
-        var count = 0
-
         val forest = parseInput()
-        forest.map { println(it) }
-
-//        forest.forEachIndexed { rowIndex, row -> row.forEachIndexed { treeIndex, tree ->
-//            val upper = forest.getOrNull(rowIndex - 1)?.getOrNull(treeIndex) ?: -1
-//            val lower = forest.getOrNull(rowIndex + 1)?.getOrNull(treeIndex) ?: -1
-//            val left = row.getOrNull(treeIndex - 1) ?: -1
-//            val right = row.getOrNull(treeIndex + 1) ?: -1
-//            val isEdge = upper == -1 || lower == -1 || left == -1 || right == -1
-//
-//            if ((tree > upper && tree > lower && tree > left && tree > right) || isEdge) ++count
-//
-//        } }
-
-        return 0
+        return forest.mapIndexed { rowIndex, row -> row.mapIndexedNotNull { treeIndex, tree ->
+            val column = getColumn(forest, treeIndex)
+            val downColumn = column.subList(rowIndex + 1, column.size)
+            val upColumn = column.subList(0, rowIndex)
+            val leftRow = row.subList(0, treeIndex)
+            val rightRow = row.subList(treeIndex + 1, row.size)
+            
+            if (!downColumn.any { it >= tree } || !upColumn.any { it >= tree } || !leftRow.any { it >= tree } || !rightRow.any { it >= tree }) {
+                tree
+            } else null
+        } }.flatten().count()
     }
 
-    override fun partB(): Int = 0
+    override fun partB(): Int {
+        val forest = parseInput()
+        return forest.mapIndexed { rowIndex, row ->
+            row.mapIndexed { treeIndex, tree ->
+                val column = getColumn(forest, treeIndex)
+                val downScore = column.subList(rowIndex + 1, column.size).takeUntil { it >= tree }.count()
+                val upScore = column.subList(0, rowIndex).reversed().takeUntil { it >= tree }.count()
+                val leftScore = row.subList(0, treeIndex).reversed().takeUntil { it >= tree }.count()
+                val rightScore = row.subList(treeIndex + 1, row.size).takeUntil { it >= tree }.count()
+                upScore * leftScore * downScore * rightScore
+            }
+        }.flatten().max()
+    }
 
-    private fun parseInput() = readInput("2022-08.txt").chunked(100)
+    private fun parseInput() = readInput("2022-08.txt").split('\n').map { it.map { it.digitToInt() } }
+
+    private fun getColumn(matrix: List<List<Int>>, col: Int) = IntArray(matrix.size) { matrix[it][col] }.toList()
+
+    private fun <T> Iterable<T>.takeUntil(predicate: (T) -> Boolean): List<T> {
+        val list = ArrayList<T>()
+        for (item in this) {
+            list.add(item)
+            if (predicate(item))
+                break
+        }
+        return list
+    }
 }
