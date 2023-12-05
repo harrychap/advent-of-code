@@ -29,4 +29,14 @@ fun main() {
     println(advent2022.Task06.partB())
     println("")
 
+    println("TASK 7")
+    println(advent2022.Task07.partA())
+    println(advent2022.Task07.partB())
+    println("")
+
+    println("TASK 8")
+    println(advent2022.Task08.partA())
+    println(advent2022.Task08.partB())
+    println("")
+
 }
