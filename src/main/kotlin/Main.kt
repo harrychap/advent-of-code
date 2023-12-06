@@ -1,4 +1,11 @@
 fun main() {
+//    advent2022()
+    advent2023()
+}
+
+fun advent2022() {
+    println("2023")
+
     println("TASK 1")
     println(advent2022.Task01.partA())
     println(advent2022.Task01.partB())
@@ -39,4 +46,23 @@ fun main() {
     println(advent2022.Task08.partB())
     println("")
 
+    println("TASK 9")
+    println(advent2022.Task09.partA())
+    println(advent2022.Task09.partB())
+    println("")
+
+    println("TASK 9")
+    println(advent2022.Task10.partA())
+    println(advent2022.Task10.partB())
+    println("")
+
+}
+
+fun advent2023() {
+    println("2023")
+
+    println("TASK 1")
+    println(advent2023.Task01.partA())
+    println(advent2023.Task01.partB())
+    println("")
 }
