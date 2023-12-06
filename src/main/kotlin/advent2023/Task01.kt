@@ -26,13 +26,12 @@ object Task01 : Task {
         val firstWordNumber = numberMap.keys.map {
             line.windowed(5, 1)
                 .firstNotNullOfOrNull { window -> numberMap.keys.firstOrNull { key -> window.contains(key) } }
-        }.firstOrNull() ?: "nothing"
+        }.firstOrNull() ?: ""
 
         val lastWordNumber = numberMap.keys.map {
             line.windowed(5, 1)
                 .mapNotNull { window -> numberMap.keys.lastOrNull { key -> window.contains(key) } }.lastOrNull()
-        }
-            .lastOrNull() ?: "nothing"
+        }.lastOrNull() ?: ""
 
         val firstWord = numberMap[firstWordNumber]
         val lastWord = numberMap[lastWordNumber]
@@ -49,5 +48,4 @@ object Task01 : Task {
 
     private fun parseInput() =
         File("src/main/input/2023-01.txt").readLines().map { it }
-
 }
