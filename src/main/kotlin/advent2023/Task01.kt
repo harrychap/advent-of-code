@@ -1,8 +1,7 @@
 package advent2023
 
 import Task
-import java.awt.SystemColor.window
-import java.io.File
+import utils.readInput
 
 object Task01 : Task {
 
@@ -23,15 +22,17 @@ object Task01 : Task {
     }
 
     override fun partB(): Int = parseInput().sumOf { line ->
+
         val firstWordNumber = numberMap.keys.map {
             line.windowed(5, 1)
                 .firstNotNullOfOrNull { window -> numberMap.keys.firstOrNull { key -> window.contains(key) } }
-        }.firstOrNull() ?: ""
+        }.firstOrNull() ?: "notfound"
 
         val lastWordNumber = numberMap.keys.map {
             line.windowed(5, 1)
                 .mapNotNull { window -> numberMap.keys.lastOrNull { key -> window.contains(key) } }.lastOrNull()
-        }.lastOrNull() ?: ""
+        }
+            .lastOrNull() ?: "notfound"
 
         val firstWord = numberMap[firstWordNumber]
         val lastWord = numberMap[lastWordNumber]
@@ -47,5 +48,6 @@ object Task01 : Task {
     }
 
     private fun parseInput() =
-        File("src/main/input/2023-01.txt").readLines().map { it }
+        readInput("2023-01.txt").split("\n")
+
 }

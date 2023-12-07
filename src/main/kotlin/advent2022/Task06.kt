@@ -1,7 +1,7 @@
 package advent2022
 
 import Task
-import readInput
+import utils.readInput
 
 object Task06 : Task {
     override fun partA(): Int = parseInput().windowed(4, 1).indexOfFirst { it.isUniqueCharacters() } + 4

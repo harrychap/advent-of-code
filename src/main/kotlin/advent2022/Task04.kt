@@ -1,7 +1,7 @@
 package advent2022
 
 import Task
-import readInput
+import utils.readInput
 
 object Task04 : Task {
     override fun partA(): Int = parseInput().count { (first, second) ->

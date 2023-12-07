@@ -1,7 +1,7 @@
 package advent2022
 
 import Task
-import readInput
+import utils.readInput
 
 object Task02 : Task {
 

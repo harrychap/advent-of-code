@@ -1,3 +1,5 @@
+package utils
+
 import java.io.File
 
 fun readInput(task: String): String {
