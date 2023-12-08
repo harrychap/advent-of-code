@@ -31,8 +31,7 @@ object Task01 : Task {
         val lastWordNumber = numberMap.keys.map {
             line.windowed(5, 1)
                 .mapNotNull { window -> numberMap.keys.lastOrNull { key -> window.contains(key) } }.lastOrNull()
-        }
-            .lastOrNull() ?: "notfound"
+        }.lastOrNull() ?: "notfound"
 
         val firstWord = numberMap[firstWordNumber]
         val lastWord = numberMap[lastWordNumber]

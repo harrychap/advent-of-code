@@ -20,19 +20,11 @@ object Task02 : Task {
     }
 
     override fun partB(): Int = parseInput().sumOf { (_, rounds) ->
-        var maxBlue = 1
-        var maxRed = 1
-        var maxGreen = 1
-        rounds.flatten().forEach { picks ->
-            when (picks.first) {
-                "red" -> if (picks.second > maxRed) maxRed = picks.second
-                "blue" -> if (picks.second > maxBlue) maxBlue = picks.second
-                "green" -> if (picks.second > maxGreen) maxGreen = picks.second
-            }
-        }
+        val maxBlue = rounds.flatten().filter { it.first == "blue" }.maxOf { it.second }
+        val maxRed = rounds.flatten().filter { it.first == "red" }.maxOf { it.second }
+        val maxGreen = rounds.flatten().filter { it.first == "green" }.maxOf { it.second }
         maxBlue * maxRed * maxGreen
     }
-
 
     private fun parseInput() =
         readInput("2023-02.txt").split("\n").map { line ->
@@ -40,8 +32,8 @@ object Task02 : Task {
                 .map { round -> round.split(",").map { pick -> pick.extractColour() to pick.findInt() } }
         }
 
-
     private fun String.findInt(): Int = this.filter { it.isDigit() }.toInt()
+
     private fun String.extractColour(): String? {
         when {
             this.contains("red") -> return "red"
