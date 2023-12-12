@@ -17,5 +17,5 @@ object Task09 : Task {
     }
 
     private fun parseInput() =
-        readInput("2023-09.txt").split("\n")
+        readInput("2023-09.txt").split("\n").map { line -> line.split(" ").map { it.toInt() } }
 }
