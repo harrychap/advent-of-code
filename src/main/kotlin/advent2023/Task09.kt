@@ -2,13 +2,22 @@ package advent2023
 
 import Task
 import utils.readInput
-import java.util.*
-import kotlin.collections.HashMap
-import kotlin.math.pow
+
 
 object Task09 : Task {
 
     override fun partA(): Int {
+        val thing = parseInput().map { line ->
+            var diff = line.zipWithNext { a, b ->  b - a }
+            println(diff)
+
+
+
+            if (diff.all { it == diff.first() }) line.last() + diff.first() else diff
+
+
+        }
+        println(thing)
         return 0
     }
 
