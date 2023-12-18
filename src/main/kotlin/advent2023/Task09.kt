@@ -3,26 +3,25 @@ package advent2023
 import Task
 import utils.readInput
 
-
 object Task09 : Task {
 
-    override fun partA(): Int {
-        val thing = parseInput().map { line ->
-            var diff = line.zipWithNext { a, b ->  b - a }
-            println(diff)
-
-
-
-            if (diff.all { it == diff.first() }) line.last() + diff.first() else diff
-
-
+    private fun history(sequence: List<Int>): List<List<Int>> =
+        buildList {
+            add(sequence)
+            do {
+                add((1..<last().size).map { i -> last()[i] - last()[i - 1] })
+            } while (last().any { it != 0 })
+            reverse()
         }
-        println(thing)
-        return 0
+
+    override fun partA(): Int = parseInput().sumOf { line ->
+        history(line).fold(0) { acc, ints -> acc + ints.last() }.toInt()
     }
 
-    override fun partB(): Int {
-        return 0
+    override fun partB(): Int = parseInput().sumOf { line ->
+        history(line).fold(0) { acc, ints ->
+            ints[0] - acc
+        }.toInt()
     }
 
     private fun parseInput() =
