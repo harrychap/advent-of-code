@@ -82,12 +82,11 @@ fun advent2023() {
     println(advent2023.Task04.partB())
     println("")
 
-//   TODO
-//    println("TASK 5")
-//    println(advent2023.Task05.partA())
-//    println(advent2023.Task05.partB())
-//    println("")
-//
+    println("TASK 5")
+    println(advent2023.Task05.partA())
+    println(advent2023.Task05.partB())
+    println("")
+
     println("TASK 6")
     println(advent2023.Task06.partA())
     println(advent2023.Task06.partB())

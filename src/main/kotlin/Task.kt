@@ -1,6 +1,6 @@
 interface Task {
 
-    fun partA(): Any
+    fun partA(): Any?
 
-    fun partB(): Any
+    fun partB(): Any?
 }
