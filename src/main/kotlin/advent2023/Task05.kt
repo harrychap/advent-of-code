@@ -2,6 +2,7 @@ package advent2023
 
 import Task
 import utils.readInput
+import kotlin.math.absoluteValue
 
 object Task05 : Task {
 
@@ -12,22 +13,43 @@ object Task05 : Task {
         return seeds.minOfOrNull { seed ->
             seed.getMinLocation(ranges)
         }
-
-
     }
-    override fun partB(): Long? {
-        //TODO not working yet
-        val seedRanges = parseSeeds().zipWithNext().map { it.first until it.second }
-        val ranges = parseInput()
-        return seedRanges.minOfOrNull { seedRange ->
-            var min = Long.MAX_VALUE
 
-            for(seed in seedRange) {
-                val minLoc = seed.getMinLocation(ranges)
-                if (minLoc < min) min = minLoc
+    override fun partB(): Long {
+        val seedRanges = parseSeeds().windowed(2, 2)
+            .map { it[0] until it[0] + it[1] }
+        val ranges = parseInput().mapValues { ranges ->
+            ranges.value.map { range ->
+                (range[1] until range[1] + range[2]) to (range[0] until range[0] + range[2])
             }
-            min
         }
+
+        val seedToSoilRanges = ranges["seed-to-soil"]!!
+        val soilToFertilizerRanges = ranges["soil-to-fertilizer"]!!
+        val fertilizerToWaterRanges = ranges["fertilizer-to-water"]!!
+        val waterToLightRanges = ranges["water-to-light"]!!
+        val lightToTemperatureRanges = ranges["light-to-temperature"]!!
+        val temperatureToHumidityRanges = ranges["temperature-to-humidity"]!!
+        val humidityToLocationRanges = ranges["humidity-to-location"]!!
+
+        var minValue = Long.MAX_VALUE
+
+        for (location in 1 until 100_000_000L) {
+            val humidity = humidityToLocationRanges.findPreviousValue(location)
+            val temperature = temperatureToHumidityRanges.findPreviousValue(humidity)
+            val light = lightToTemperatureRanges.findPreviousValue(temperature)
+            val water = waterToLightRanges.findPreviousValue(light)
+            val fertilizer = fertilizerToWaterRanges.findPreviousValue(water)
+            val soil = soilToFertilizerRanges.findPreviousValue(fertilizer)
+            val seed = seedToSoilRanges.findPreviousValue(soil)
+
+            if (seedRanges.any { it.contains(seed) }) {
+                minValue = location
+                break
+            }
+        }
+
+       return minValue
     }
 
     private fun Long.getMinLocation(ranges: Map<String, List<List<Long>>>): Long {
@@ -50,6 +72,12 @@ object Task05 : Task {
         }
     } ?: seed
 
+    private fun List<Pair<LongRange, LongRange>>.findPreviousValue(value: Long): Long {
+        val ranges = this.firstOrNull { it.second.contains(value) }
+            ?: return value
+
+        return ranges.first.first + (value - ranges.second.first).absoluteValue
+    }
 
     private fun parseSeeds() = readInput("2023-05.txt").split("\n").first().split(":").last().trim().split(" ").map { it.toLong() }
 
