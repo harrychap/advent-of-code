@@ -144,7 +144,6 @@ object Task03 : Task {
                             numbers.add(fullNumberLeft)
                         }
                     }
-                    println(numbers)
                     if (numbers.size == 2) {
                         val ratio = numbers.fold(1) { acc, next -> acc * next }
                         numbersToCount.add(ratio)
