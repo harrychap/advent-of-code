@@ -33,12 +33,12 @@ object Task11 : Task {
     }
 
     override fun partB(): Int {
-        return parseInput().expand(1_000_001).uniquePairs().sumOf { (left, right) ->
+        return parseInput().expand(999999).uniquePairs().sumOf { (left, right) ->
             (abs(left.x - right.x) + abs(left.y - right.y))
         }
     }
 
-    private fun List<Point>.expand(repeatBy: Int): List<Point> {
+    private fun List<Point>.expand(expandBy: Int): List<Point> {
         val rowsToExpand =
             this.groupBy { it.y }.filter { it.value.all { point -> point.type == PointType.EMPTY } }.map { it.key }
         val columnsToExpand =
@@ -47,28 +47,17 @@ object Task11 : Task {
         var expanded = this.filter { it.type == PointType.GALAXY }
 
         rowsToExpand.forEach { rowNum ->
-            repeat(repeatBy) {
-                expanded = expanded.map {
-                    if (it.y <= rowNum) {
-                        it.copy(x = it.x, y = it.y - 1)
-                    } else {
-                        it
-                    }
-                }
+            expanded = expanded.map {
+                if (it.y <= rowNum) it.copy(x = it.x, y = it.y - expandBy)  else it
+
+            }
+        }
+        columnsToExpand.forEach { colNum ->
+            expanded = expanded.map {
+                if (it.x <= colNum) it.copy(x = it.x - expandBy, y = it.y) else it
             }
         }
 
-        columnsToExpand.forEach { colNum ->
-            repeat(repeatBy) {
-                expanded = expanded.map {
-                    if (it.x <= colNum) {
-                        it.copy(x = it.x - 1, y = it.y)
-                    } else {
-                        it
-                    }
-                }
-            }
-        }
         return expanded
     }
 
