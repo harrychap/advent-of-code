@@ -2,6 +2,7 @@ package advent2022
 
 import Task
 import utils.readInput
+import utils.takeUntil
 
 object Task08 : Task {
     override fun partA(): Int {
@@ -37,13 +38,4 @@ object Task08 : Task {
 
     private fun getColumn(matrix: List<List<Int>>, col: Int): List<Int> = IntArray(matrix.size) { matrix[it][col] }.toList()
 
-    private fun <T> Iterable<T>.takeUntil(predicate: (T) -> Boolean): List<T> {
-        val list = ArrayList<T>()
-        for (item in this) {
-            list.add(item)
-            if (predicate(item))
-                break
-        }
-        return list
-    }
 }

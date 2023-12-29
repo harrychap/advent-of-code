@@ -21,14 +21,12 @@ object Task15 : Task {
             }
 
             if (seq.contains("=") && box.any { it.first == label }) {
-                val index: Int = box.indexOfFirst { it.first == label }
-                box[index] = Pair(label, focalLeng)
+                box[box.indexOfFirst { it.first == label }] = Pair(label, focalLeng)
             }
 
             if (seq.contains("=") && box.none { it.first == label }) {
                 box.add(Pair(label, focalLeng))
             }
-
         }
 
         return boxes.filter { it.value.isNotEmpty() }.flatMap { box ->

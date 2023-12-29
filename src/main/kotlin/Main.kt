@@ -111,10 +111,10 @@ fun advent2023() {
 //    println(advent2023.Task10.partB())
 //    println("")
 //
-//    println("TASK 11")
-//    println(advent2023.Task11.partA())
-//    println(advent2023.Task11.partB())
-//    println("")
+    println("TASK 11")
+    println(advent2023.Task11.partA())
+    println(advent2023.Task11.partB())
+    println("")
 //
 //    println("TASK 12")
 //    println(advent2023.Task12.partA())

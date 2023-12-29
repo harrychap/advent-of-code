@@ -2,6 +2,7 @@ package advent2023
 
 import Task
 import utils.readInput
+import utils.takeUntil
 
 object Task03 : Task {
 
@@ -160,16 +161,6 @@ object Task03 : Task {
         Array(this.size) { this.getOrNull(it)?.getOrNull(col) }.toList()
 
     private fun String?.isInt(): Boolean = this?.toIntOrNull() != null
-
-    private fun <T> Iterable<T>.takeUntil(predicate: (T) -> Boolean): List<T> {
-        val list = ArrayList<T>()
-        for (item in this) {
-            list.add(item)
-            if (predicate(item))
-                break
-        }
-        return list
-    }
 
     private fun parseInput() =
         readInput("2023-03.txt").split('\n').map { line -> line.map { it.toString() } }
