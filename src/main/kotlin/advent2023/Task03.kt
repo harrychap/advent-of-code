@@ -53,7 +53,6 @@ object Task03 : Task {
         points.find { it.x == this.x - 1 && it.y == this.y + 1 }
     ).filter { it.value.isDigit() }
 
-
     private fun Point.expandNumber(points: List<Point>): List<Point> {
         val index = points.indexOf(this)
         val leftNumbers = points.subList(0, index).reversed().takeUntil { !it.value.isDigit() }.filter { it.value.isDigit() }.reversed()
