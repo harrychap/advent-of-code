@@ -76,35 +76,35 @@ fun advent2023() {
     println(advent2023.Task03.partB())
     println("")
 
-//    println("TASK 4")
-//    println(advent2023.Task04.partA())
-//    println(advent2023.Task04.partB())
-//    println("")
-//
-//    println("TASK 5")
-//    println(advent2023.Task05.partA())
-//    println(advent2023.Task05.partB())
-//    println("")
-//
-//    println("TASK 6")
-//    println(advent2023.Task06.partA())
-//    println(advent2023.Task06.partB())
-//    println("")
-//
-//    println("TASK 7")
-//    println(advent2023.Task07.partA())
-//    println(advent2023.Task07.partB())
-//    println("")
-//
-//    println("TASK 8")
-//    println(advent2023.Task08.partA())
-//    println(advent2023.Task08.partB())
-//    println("")
-//
-//    println("TASK 9")
-//    println(advent2023.Task09.partA())
-//    println(advent2023.Task09.partB())
-//    println("")
+    println("TASK 4")
+    println(advent2023.Task04.partA())
+    println(advent2023.Task04.partB())
+    println("")
+
+    println("TASK 5")
+    println(advent2023.Task05.partA())
+    println(advent2023.Task05.partB())
+    println("")
+
+    println("TASK 6")
+    println(advent2023.Task06.partA())
+    println(advent2023.Task06.partB())
+    println("")
+
+    println("TASK 7")
+    println(advent2023.Task07.partA())
+    println(advent2023.Task07.partB())
+    println("")
+
+    println("TASK 8")
+    println(advent2023.Task08.partA())
+    println(advent2023.Task08.partB())
+    println("")
+
+    println("TASK 9")
+    println(advent2023.Task09.partA())
+    println(advent2023.Task09.partB())
+    println("")
 //
 //    println("TASK 10")
 //    println(advent2023.Task10.partA())
